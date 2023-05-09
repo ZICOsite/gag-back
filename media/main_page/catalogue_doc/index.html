@@ -1,0 +1,493 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% trans "ON LOGISTICS CO" %}</title>
+
+    <link rel="shortcut icon" href="{% static 'img/site.webp' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'styles/main.min.css' %}">
+</head>
+
+<body id="body">
+<header class="header" id="header">
+    <img src="{% static "img/header/banner.webp" %}" alt="" class="header__banner">
+    <div class="container extra">
+        <nav class="nav">
+            <a href="{% url 'index' %}" class="nav__logo"><img src="{% static '/img/logo.svg' %}" alt=""></a>
+            <div class="nav__burger">
+                <span class="nav__burger-line"></span>
+            </div>
+            <div class="nav__menu">
+
+
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="{% url 'index' %}" class="nav__link active">{% trans "Главная" %}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{% url 'company' %}" class="nav__link">{% trans "О компании" %}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{% url 'services' %}" class="nav__link">{% trans "Услуги" %}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#reviews" class="nav__link">{% trans "Отзывы" %}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contacts" class="nav__link">{% trans "Контакты" %}</a>
+                    </li>
+                    <li class="nav__item">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+
+
+                        <div class="nav__item-select">
+
+
+
+                                    <img class="nav__item-flag" src="{% static 'img/header/flags/ru.svg' %}" alt="">
+                                    <span class="nav__item-lang">Русский</span>
+                                    <svg width="8" height="12" viewBox="0 0 8 12" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg" class="nav__item-arrow">
+                                        <path
+                                                d="M1.48438 0.140625L0.765625 0.859375L5.90625 6L0.765625 11.1406L1.48438 11.8594L6.98438 6.35938L7.32812 6L6.98438 5.64062L1.48438 0.140625Z"
+                                                fill="#BEC5D3"/>
+                                    </svg>
+
+
+
+
+                        </div>
+
+
+                        <ul class="nav__dropdown">
+                            {% for language in languages %}
+                                {% if language.code == 'ru' %}
+
+                                    <li class="nav__dropdown-item"><a href="/{{ language.code }}/"
+                                                                      class="nav-dropdown-link"><img
+                                            class="nav__item-flag" src="{% static "img/header/flags/ru.svg" %}" alt=""></a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav__dropdown-item"><a href="/{{ language.code }}/"
+                                                                      class="nav-dropdown-link"><img
+                                            class="nav__item-flag" src="{% static "img/header/flags/en.svg" %}" alt=""></a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="header__content">
+            <div class="header__content-desc">
+                <h1 class="header__content-title">{% trans "Логистические услуги" %}</h1>
+                <p class="header__content-txt">{% trans "Нашей целью является транспортировка какого-либо груза из точки А в точку Б с оптимальным соотношением цены и качества. Подбираем наиболее подходящие видытранспорта, маршруты, скорость перевозки." %}</p>
+                <a href="{% url 'company' %}" class="header__content-btn btn">{% trans "Подробнее" %}</a>
+            </div>
+            <ul class="header__content-list">
+                <li class="header__content-item">
+                    {% trans "Услуга автозабора груза со склада отправителя" %}
+
+                </li>
+                <li class="header__content-item">
+                    {% trans "Поиск поставщиков и производителей" %}
+
+                </li>
+                <li class="header__content-item">
+                    {% trans "Услуга под ключ" %}
+                </li>
+                <li class="header__content-item">
+                    {% trans "Страхование груза на всех этапах" %}
+                </li>
+                <li class="header__content-item">
+                    {% trans "Складская обработка" %}
+                </li>
+                <li class="header__content-item">
+                    {% trans "Отслеживание доставки" %}
+                </li>
+                <li class="header__content-item">
+                    {% trans "Таможенные услуги" %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="services">
+        <div class="container">
+            <div class="services__top">
+                <h2 class="services__title title"><span
+                        class="services__title-span title__span">{% trans "Наши" %} </span>{% trans "услуги" %}
+                </h2>
+                <a href="{% url 'services' %}" class="services__btn btn">{% trans "Посмотреть все услуги" %}</a>
+            </div>
+            <div class="services__cards">
+                <div class="services__card">
+                    <img src="{% static '/img/services/1.webp' %}" alt="" class="services__card-img">
+                    <h4 class="services__card-title">{% trans "Железнодорожные первозки" %}</h4>
+                    <p class="services__card-txt">{% trans "Возможность перевозки большого количества грузов." %}</p>
+                </div>
+                <div class="services__card">
+                    <img src="{% static "/img/services/2.webp" %}" alt="" class="services__card-img">
+                    <h4 class="services__card-title">{% trans "Авиаперевозки" %}</h4>
+                    <p class="services__card-txt">{% trans "Индивидуальные схемы доставки под каждого заказчика." %}</p>
+                </div>
+                <div class="services__card">
+                    <img src="{% static "/img/services/3.webp" %}" alt="" class="services__card-img">
+                    <h4 class="services__card-title">{% trans "Автоперевозки" %}</h4>
+                    <p class="services__card-txt">{% trans "Автомобильные перевозки грузов с полной и частичной загрузкой." %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="advantages">
+        <div class="container">
+            <img src="{% static "/img/advantages/advantages.webp" %}" alt="" class="advantages__banner">
+            <h2 class="advantages__title title"><span
+                    class="title__span">{% trans "Наши" %}</span>{% trans приемущества %}</h2>
+            <div class="advantages__cards">
+                <div class="advantages__card">
+                    <img src="{% static "/img/advantages/coin.svg" %}" alt="" class="advantages__card-icon">
+                    <h3 class="advantages__card-title">{% trans "Доступные цены" %}</h3>
+                    <p class="advantages__card-txt">{% trans "Вас приятно удивят наши цены, так как работая с нами вы получаете ставки от первого лица, без накруток и скрытых комиссий." %}</p>
+                </div>
+                <div class="advantages__card">
+                    <img src="{% static "/img/advantages/flash-circle.svg" %}" alt="" class="advantages__card-icon">
+                    <h3 class="advantages__card-title">{% trans "Быстро" %}</h3>
+                    <p class="advantages__card-txt">{% trans "Наша компания готова предложить индивидуальные и срочные услуги доставки. Наши менеджеры подберут для вас оптимальныемаршруты это сократит сроки доставки." %}</p>
+                </div>
+                <div class="advantages__card">
+                    <img src="{% static "/img/advantages/tick-circle.svg" %}" alt="" class="advantages__card-icon">
+                    <h3 class="advantages__card-title">{% trans Качественно %}</h3>
+                    <p class="advantages__card-txt">{% trans "Мы предоставим клиенту персонального менеджера, который полностью избавит его от хлопот поорганизации перевозки." %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="calculate">
+        <div class="container">
+            <div class="calculate__row">
+
+                <h2 class="calculate__title">{% trans "Быстрый расчет стоимости" %}</h2>
+                <form action="" class="calculate__form" method="POST">
+
+                    <div class="calculate__form-choose">
+                    {% csrf_token %}
+                        <label class="calculate__form-user">
+                            {% trans "Имя" %}
+                            <input type="text" name="name" class="calculate__form-input" placeholder="{% trans "Введите имя" %}"
+                                   required >
+                        </label>
+                        <label class="calculate__form-user">
+                            {% trans "Номер" %}
+                            <input type="tel" name="tel" class="calculate__form-input"
+                                   placeholder="{% trans "Введите номер телефона" %}"
+                                   required>
+                        </label>
+                        <div class="select-box" id="selectBox">
+                            <span class="calculate__form-extra">{% trans "Откуда" %}</span>
+                            <div class="selected">
+                                <span>{% trans "Введите город" %}</span>
+                                <svg width="8" height="12" viewBox="0 0 8 12" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="selected__arrow">
+                                    <path
+                                            d="M1.48438 0.140625L0.765625 0.859375L5.90625 6L0.765625 11.1406L1.48438 11.8594L6.98438 6.35938L7.32812 6L6.98438 5.64062L1.48438 0.140625Z"
+                                            fill="#41C684"/>
+                                </svg>
+                            </div>
+                            <div class="options-container">
+                                {% for item in place_shipment %}
+                                <div class="option">
+                                    <input type="radio" class="radio" id="{{item.id}}" value="{{item.place_shipment}}" name="place_shipment"/>
+                                    <label for="{{item.id}}">{{item.place_shipment}}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="select-box" id="selectBox2">
+                            <span class="calculate__form-extra">{% trans "Куда" %}</span>
+                            <div class="selected">
+                                <span>{% trans "Выбрать направление" %}</span>
+                                <svg width="8" height="12" viewBox="0 0 8 12" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="selected__arrow">
+                                    <path
+                                            d="M1.48438 0.140625L0.765625 0.859375L5.90625 6L0.765625 11.1406L1.48438 11.8594L6.98438 6.35938L7.32812 6L6.98438 5.64062L1.48438 0.140625Z"
+                                            fill="#41C684"/>
+                                </svg>
+                            </div>
+                            <div class="options-container">
+                                {% for item in delivery_address %}
+                                <div class="option">
+                                    <input type="radio" class="radio" id="{{item.id}}" value="{{item.delivery_address}}" name="delivery_address"/>
+                                    <label for="{{item.id}}">{{item.delivery_address}}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <label class="calculate__form-label">
+                            LCL
+                            <input type="radio" class="calculate__form-check" name="load" value="LCL" required>
+                            <span class="calculate__form-spanCheck"><img src="{% static "/img/calculate/check.svg" %}"
+                                                                         alt=""></span>
+                        </label>
+                        <label class="calculate__form-label">
+                            LTL
+                            <input type="radio" class="calculate__form-check" name="load" value="LTL" required>
+                            <span class="calculate__form-spanCheck"><img src="{% static "/img/calculate/check.svg" %}"
+                                                                         alt=""></span>
+                        </label>
+                        <label class="calculate__form-label">
+                            FOB - {% trans "со склада" %}
+                            <input type="radio" class="calculate__form-check" name="params"
+                                   value="FOB" required>
+                            <span class="calculate__form-spanCheck"><img src="{% static "/img/calculate/check.svg" %}"
+                                                                         alt=""></span>
+                        </label>
+                        <label class="calculate__form-label">
+                            EXW - {% trans "забрать с адреса" %}
+                            <input type="radio" class="calculate__form-check" name="params"
+                                   value="EXW" required>
+                            <span class="calculate__form-spanCheck"><img src="{% static "/img/calculate/check.svg" %}"
+                                                                         alt=""></span>
+                        </label>
+                    </div>
+                    <div class="calculate__form-info">
+                        <div class="calculate__form-weight">
+                            <p class="calculate__form-extra">{% trans "Вес" %}</p>
+                            <input type="number" class="calculate__form-inp" min="0" max="26000" name="weight" required>
+                            {% trans "кг" %}
+                        </div>
+                        <div class="calculate__form-cube">
+                            <p class="calculate__form-extra">{% trans "Обьем" %}</p>
+                            <input type="number" class="calculate__form-inp" min="0" max="68" name="volume" required>
+                            {% trans "кг" %}
+                        </div>
+                    </div>
+                    <button class="calculate__form-btn btn send">{% trans "Отправить" %}</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="cargo">
+        <div class="container">
+            <div class="cargo__content">
+                <img src="{% static "/img/cargo/1.webp" %}" alt="" class="cargo__content-img">
+                <div class="cargo__content-desc">
+                    <h2 class="cargo__content-title title">{% trans "Грузоперевозки из Европы" %}</h2>
+                    <p class="cargo__content-txt">{% trans "Логистическая компания обладает репутацией лидера, стабильностью изначительными возможностями по привлечению необходимого финансирования для реализациикрупных проектов. У нас есть положительный опыт start up, и мы готовы вкладывать собственныеинвестиции в проекты. В своей работе мы руководствуемся не только вопросом «Как?», основнойприоритет для нас – понимание потребностей и уникальных запросов наших клиентов, которые мыучитываем при выполнении каждого конкретного заказа." %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="process">
+        <div class="container">
+            <div class="process__content">
+                <div class="process__content-desc">
+                    <h2 class="process__content-title title">{% trans "Процесс работы" %}</h2>
+                    <p class="process__content-txt">{% trans "Логистическая компания обладает репутацией лидера, стабильностьюизначительными возможностями по привлечению необходимого финансирования для реализациикрупныхпроектов. У нас есть положительный опыт start up, и мы готовы вкладывать собственныеинвестиции впроекты" %}</p>
+                </div>
+                <div class="process__content-video">
+                    <img src="{% static "/img/process/play.svg" %}" alt="" class="process__content-icon">
+                    <video src="" poster="{% static "/img/process/poster.webp" %}" class="process__content-vid"></video>
+                </div>
+            </div>
+        </div>
+        <div class="process__gallery">
+            <img src="{% static "/img/process/gallery/1.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/2.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/3.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/4.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/5.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/6.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/7.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/8.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/9.webp" %}" alt="">
+            <img src="{% static "/img/process/gallery/10.webp" %}" alt="">
+        </div>
+    </section>
+    <section class="partner">
+        <div class="container">
+            <h2 class="partner__title title">{% trans "Клиенты и партнеры" %}</h2>
+            <p class="partner__txt">{% trans "Наши клиенты, сотрудничество с которыми мы особенно гордимся" %}</p>
+            <div class="partner__brands">
+                <img src="{% static "/img/partner/olmos.svg" %}" alt="" class="partner__brands-icon">
+                <img src="{% static "/img/partner/madad.svg" %}" alt="" class="partner__brands-icon">
+                <img src="{% static "/img/partner/lift.svg" %}" alt="" class="partner__brands-icon">
+                <img src="{% static "/img/partner/trust.svg" %}" alt="" class="partner__brands-icon">
+                <img src="{% static "/img/partner/reliance.svg" %}" alt="" class="partner__brands-icon">
+            </div>
+        </div>
+    </section>
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="reviews__title title">{% trans "Отзывы наших клиентов" %}</h2>
+            <div class="swiper reviews__carousel">
+                <div class="swiper-wrapper reviews__wrapper">
+                    <div class="swiper-slide">
+                        <div class="reviews__slider">
+                            <img src="{% static "/img/reviews/quotes.svg" %}" alt="" class="reviews__slider-quotes">
+                            <p class="reviews__slider-txt">{% trans "Транспортная компания «ON LOGISTICS CO» является нашимнадежным партнером по перевозкам оборудования. Благодаря сотрудничеству снашиклиенты всегда получали заказы в установленные договорными документами сроки.Сотрудники «ON LOGISTICS CO» - квалифицированы, компетентны и умеют работать схрупкими и ценными грузами." %}</p>
+                            <div class="reviews__slider-author">
+                                <img src="{% static "/img/partner/madad.svg" %}" alt="" class="reviews__slider-ava">
+                                <strong>MADAD</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="reviews__slider">
+                            <img src="{% static "/img/reviews/quotes.svg" %}" alt="" class="reviews__slider-quotes">
+                            <p class="reviews__slider-txt">{% trans "C «ON LOGISTICS CO» мы успешно сотрудничаем уже окологода. Перевозим с их помощью различные грузы разных габаритных размеров. Никогда небыло никаких сбоев в работе. Транспортировка всегда осуществлялась на высоком уровнеи по доступным ценам, никогда не было задержек в доставке. У нас толькоположительные отзывы!" %}</p>
+                            <div class="reviews__slider-author">
+                                <img src="{% static "/img/partner/olmos.svg" %}" alt="" class="reviews__slider-ava">
+                                <strong>{% trans "OLMOS BLOK" %}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="reviews__slider">
+                            <img src="{% static "/img/reviews/quotes.svg" %}" alt="" class="reviews__slider-quotes">
+                            <p class="reviews__slider-txt">{% trans "Всегда искали перевозчика с продуманной логистикой, и«ТрансЛогист» мне полностью подходит. Это компания, способная всегда решить проблемус транспортом, а не создать новую. Спокойно доверяю им свои грузы. Благодарна замноголетнее плодотворное сотрудничество!" %}</p>
+                            <div class="reviews__slider-author">
+                                <img src="{% static "/img/partner/lift.svg" %}" alt="" class="reviews__slider-ava">
+                                <strong>LIFT CENTR</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="company">
+        <div class="container">
+            <div class="company__content">
+                <div class="company__content-special">
+                    <img src="{% static "/img/compamy/1.webp" %}" alt="" class="company__content-img">
+                    <div class="company__content-item">
+                        <img src="{% static "/img/compamy/dropbox.svg" %}" alt="" class="company__content-icon">
+                        <p class="company__content-text">{% trans "Выполняем дополнительную упаковку грузов" %}</p>
+                    </div>
+                    <div class="company__content-item">
+                        <img src="{% static "/img/compamy/card-pos.svg" %}" alt="" class="company__content-icon">
+                        <p class="company__content-text">{% trans "Помогаем сократить расходы в 2 раза!" %}</p>
+                    </div>
+                </div>
+                <div class="company__content-desc">
+                    <h2 class="company__content-title title">{% trans "О компании" %}</h2>
+                    <p class="company__content-txt">{% trans "Логистическая компания обладает репутацией лидера, стабильностьюи значительными возможностями по привлечению необходимого финансирования для реализациикрупных проектов. У нас есть положительный опыт start up, и мы готовы вкладывать собственныеинвестиции в проекты, обладая при этом собственной профессиональной командой внедрения!" %}</p>
+                    <a href="{% url 'company' %}" class="company__content-btn btn">{% trans "Подробнее" %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <h2 class="contacts__title title">{% trans "Контакты" %}</h2>
+            <div class="contacts__content">
+                <div class="contacts__left">
+                    <div class="contacts__left-box _border">
+                        <img src="{% static "/img/contacts/location.svg" %}" alt="" class="contacts__left-icon">
+                        <p class="contacts__left-txt"><b
+                                class="contacts__left-title">{% trans "Адрес :" %}</b>{% trans "г.Ташкент, ул.С.Машхадий 79,бизнес цент T-Tower" %}
+                        </p>
+                    </div>
+                    <div class="contacts__left-info _border">
+                        <div class="contacts__left-box">
+                            <img src="{% static "/img/contacts/call-calling.svg" %}" alt="" class="contacts__left-icon">
+                            <p class="contacts__left-txt"><b class="contacts__left-title">{% trans "Телефон :" %}</b><a
+                                    href="tel:+998950404090">+998950404090</a></p>
+                        </div>
+                        <div class="contacts__left-box">
+                            <img src="{% static "/img/contacts/sms.svg" %}" alt="" class="contacts__left-icon">
+                            <p class="contacts__left-txt"><b class="contacts__left-title">{% trans "Почта :" %}</b><a
+                                    href="mailto:onlogisticsco@gmail.com">onlogisticsco@gmail.com</a></p>
+                        </div>
+                        <div class="contacts__left-box">
+                            <img src="{% static "/img/contacts/clock.svg" %}" alt="" class="contacts__left-icon">
+                            <p class="contacts__left-txt">{% trans "Ежедневно с" %} <b class="contacts__left-title">09:00</b>{% trans "до" %}<b
+                                    class="contacts__left-title">18:00,</b> {% trans "без перерыва" %}</p>
+                        </div>
+                        <div class="contacts__left-socials">
+                            <a href="#!" class="contacts__left-social"><img
+                                    src="{% static "/img/contacts/Facebook.svg" %}"
+                                    alt=""></a>
+                            <a href="#!" class="contacts__left-social"><img
+                                    src="{% static "/img/contacts/Instagram.svg" %}"
+                                    alt=""></a>
+                            <a href="#!" class="contacts__left-social"><img
+                                    src="{% static "/img/contacts/Telegram_black.svg" %}"
+                                    alt=""></a>
+                            <a href="#!" class="contacts__left-social"><img
+                                    src="{% static "/img/contacts/Youtube.svg" %}"
+                                    alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts__map">
+                    <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.8554045181045!2d69.31539311566878!3d41.31200910862711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b39eef48f65%3A0xd15ff91911055708!2z0JHQuNC30L3QtdGBLdGG0LXQvdGC0YAgVC1Ub3dlcg!5e0!3m2!1sru!2s!4v1672661424505!5m2!1sru!2s"
+                            width="100%" height="326" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="footer" id="footer">
+    <div class="container">
+        <nav class="footer__nav">
+            <a href="{% url 'index' %}" class="footer__logo"><img src="{% static "/img/logo.svg" %}" alt=""></a>
+            <ul class="footer__list">
+                <li class="footer__item">
+                    <a href="{% url 'index' %}" class="footer__link active">{% trans "Главная" %}</a>
+                </li>
+                <li class="footer__item">
+                    <a href="{% url 'company' %}" class="footer__link">{% trans "О компании" %}</a>
+                </li>
+                <li class="footer__item">
+                    <a href="{% url 'services' %}" class="footer__link">{% trans "Услуги" %}</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#reviews" class="footer__link">{% trans "Отзывы" %}</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#contacts" class="footer__link">{% trans "Контакты" %}</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="footer__bottom">
+            <p class="footer__bottom-txt" id="year">
+                <script>const zico = new Date();
+                year.innerText = 'Onlogisticsco© ' + zico.getFullYear();</script>
+                All Rights Reserved
+            </p>
+            <a href="#!"
+               class="footer__bottom-link">{% trans "Договор оферта · Политика конфиденциальности · Пользовательскоесоглашение" %}</a>
+        </div>
+    </div>
+</footer>
+<div class="modal">
+    <div class="modal__content">
+        <img src="{% static "/img/logo.svg" %}" alt="" class="modal__content-img">
+        <h3 class="modal__content-title">{% trans "Спасибо!" %}</h3>
+        <p class="modal__content-txt">{% trans "Ваша заявка успешно отправлена наш менеджер свяжется с вами в ближайшее время." %}{{ bot_price }}
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static "scripts/main.min.js" %}"></script>
+</body>
+
+</html>
